@@ -10,7 +10,7 @@ movies.get('/', getMovies);
 
 movies.post('/', celebrate({
   body: Joi.object().keys({
-    movieId: Joi.string().required(),
+    movieId: Joi.number().required(),
     country: Joi.string().required(),
     director: Joi.string().required(),
     duration: Joi.number().required(),

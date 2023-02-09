@@ -18,25 +18,7 @@ const getMovies = async (req, res, next) => {
 
 const addMovie = async (req, res, next) => {
   try {
-    const {
-      country, director, duration, year, description, image,
-      nameRU, nameEN, thumbnail, movieId, trailerLink,
-    } = req.body;
-    const owner = req.user._id;
-    const newMovie = await new Movie({
-      country,
-      director,
-      duration,
-      year,
-      description,
-      image,
-      nameRU,
-      nameEN,
-      thumbnail,
-      movieId,
-      trailerLink,
-      owner,
-    }).populate('owner');
+    const newMovie = await new Movie({ ...req.body, owner: req.user._id }).populate('owner');
     res.send(await newMovie.save());
   } catch (err) {
     next(err);
